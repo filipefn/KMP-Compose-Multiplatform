@@ -1,0 +1,17 @@
+CREATE TABLE IF NOT EXISTS Launch (
+    flightNumber INTEGER NOT NULL,
+    missionName TEXT NOT NULL,
+    details TEXT,
+    launchSuccess INTEGER DEFAULT 0
+);
+
+insertLaunch:
+INSERT INTO Launch(flightNumber, missionName, details, launchSuccess)
+VALUES(?, ?, ?, ?);
+
+removeAllLaunches:
+DELETE FROM Launch;
+
+selectAllLaunchesInfo:
+SELECT Launch.*
+FROM Launch;
