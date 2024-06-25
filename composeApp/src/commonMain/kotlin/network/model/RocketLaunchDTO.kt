@@ -6,6 +6,7 @@ import kotlinx.serialization.Serializable
 
 @Serializable
 data class RocketLaunchDTO(
+    @SerialName("rocket") val rocketId: String,
     @SerialName("flight_number") val flightNumber: Int?,
     @SerialName("name") val missionName: String?,
     @SerialName("details") val details: String?,

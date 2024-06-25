@@ -1,12 +1,15 @@
 package di
 
 import domain.LaunchesRepository
+import domain.RocketRepository
 import network.SpaceXApi
 import network.getHttpClient
 import org.koin.core.module.Module
 import org.koin.dsl.module
-import presentation.RocketLaunchScreenModel
+import presentation.launch.RocketLaunchScreenModel
+import presentation.rocket.RocketScreenModel
 import repository.LaunchesRepositoryImpl
+import repository.RocketRepositoryImpl
 
 val networkModule = module {
     single { getHttpClient() }
@@ -19,6 +22,11 @@ val dataModule = module {
         spaceXApi = get(),
         databaseDriverFactory = get()
     ) }
+
+    single<RocketRepository> { RocketRepositoryImpl(spaceXApi = get()) }
 }
 
-expect val screenModelModule: Module
+val screenModelModule = module {
+    factory { RocketLaunchScreenModel(get()) }
+    factory { RocketScreenModel(get()) }
+}

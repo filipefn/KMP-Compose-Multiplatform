@@ -19,6 +19,7 @@ voyagerNavigator = "1.1.0-beta02"
 napier = "2.7.1"
 ktor = "2.3.11"
 sqlDelight = "2.0.2"
+kamel = "0.9.5"
 koinComposeMultiplatform = "1.2.0-alpha3"
 
 
@@ -33,6 +34,8 @@ androidx-appcompat = { group = "androidx.appcompat", name = "appcompat", version
 androidx-material = { group = "com.google.android.material", name = "material", version.ref = "androidx-material" }
 androidx-constraintlayout = { group = "androidx.constraintlayout", name = "constraintlayout", version.ref = "androidx-constraintlayout" }
 androidx-activity-compose = { module = "androidx.activity:activity-compose", version.ref = "androidx-activityCompose" }
+
+kamel = { module = "media.kamel:kamel-image", version.ref = "kamel" }
 
 koin-android = { module = "io.insert-koin:koin-android", version.ref = "koin" }
 koin-androidx-compose = { module = "io.insert-koin:koin-androidx-compose", version.ref = "koin" }

@@ -1,4 +1,4 @@
-package presentation
+package presentation.launch
 
 import cafe.adriel.voyager.core.model.StateScreenModel
 import cafe.adriel.voyager.core.model.screenModelScope
@@ -9,15 +9,11 @@ class RocketLaunchScreenModel(
     private val repository: LaunchesRepository
 ) : StateScreenModel<RocketLaunchState>(RocketLaunchState.Loading) {
 
-    init {
-        getAllLaunches(false)
-    }
-
-    fun getAllLaunches(isForceReload: Boolean) {
+    fun getAllLaunches(isForceReload: Boolean, rocketId: String) {
         screenModelScope.launch {
             mutableState.value = RocketLaunchState.Loading
             try {
-                val launches = repository.getAllLaunches(isForceReload)
+                val launches = repository.getAllLaunches(isForceReload, rocketId)
                 mutableState.value = RocketLaunchState.Loaded(launches)
             } catch (e: Exception) {
                 mutableState.value = RocketLaunchState.Error

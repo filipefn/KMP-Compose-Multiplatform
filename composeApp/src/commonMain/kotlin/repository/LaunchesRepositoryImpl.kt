@@ -13,17 +13,22 @@ class LaunchesRepositoryImpl(
 ) : LaunchesRepository {
     private val database = Database(databaseDriverFactory)
 
-
-    override suspend fun getAllLaunches(forceReload: Boolean): List<RocketLaunch> {
+    override suspend fun getAllLaunches(
+        forceReload: Boolean,
+        rocketId: String
+    ): List<RocketLaunch> {
         val cacheLaunches = database.getAllLaunches()
 
         return if (cacheLaunches.isNotEmpty() && forceReload.not()) {
-            cacheLaunches.map { it.toDomain() }
+            cacheLaunches
+                .filter { it.rocketId == rocketId }
+                .map { it.toDomain() }
         } else {
             spaceXApi.getAllLaunches().also {
                 database.clearCache()
                 database.insertLaunches(it)
-            }.map { it.toDomain() }
+            }.filter { it.rocketId == rocketId }
+                .map { it.toDomain() }
         }
     }
 }

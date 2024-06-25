@@ -23,7 +23,7 @@ fun getHttpClient() = HttpClient {
         }
 
         install(DefaultRequest) {
-            url("https://api.spacexdata.com/v5/")
+            url("https://api.spacexdata.com/")
             header(HttpHeaders.ContentType, ContentType.Application.Json)
         }
 

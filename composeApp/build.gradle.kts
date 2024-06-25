@@ -49,6 +49,7 @@ kotlin {
             implementation(compose.components.uiToolingPreview)
 
             implementation(libs.napier)
+            implementation(libs.kamel)
 
             implementation(libs.sqldelight.runtime)
             implementation(libs.sqldelight.driver.extensions)
@@ -117,6 +118,7 @@ sqldelight {
         create("AppDatabase") {
             packageName.set("com.aula6.cache")
             generateAsync.set(true)
+            version = 2
         }
     }
     linkSqlite.set(true)

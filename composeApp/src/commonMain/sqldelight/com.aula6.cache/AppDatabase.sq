@@ -1,4 +1,5 @@
 CREATE TABLE IF NOT EXISTS Launch (
+    rocketId TEXT NOT NULL,
     flightNumber INTEGER NOT NULL,
     missionName TEXT NOT NULL,
     details TEXT,
@@ -6,8 +7,8 @@ CREATE TABLE IF NOT EXISTS Launch (
 );
 
 insertLaunch:
-INSERT INTO Launch(flightNumber, missionName, details, launchSuccess)
-VALUES(?, ?, ?, ?);
+INSERT INTO Launch(rocketId, flightNumber, missionName, details, launchSuccess)
+VALUES(?,?, ?, ?, ?);
 
 removeAllLaunches:
 DELETE FROM Launch;

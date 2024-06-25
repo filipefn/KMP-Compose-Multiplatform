@@ -11,6 +11,7 @@ class Database(databaseDriverFactory: DatabaseDriverFactory) {
     fun getAllLaunches(): List<RocketLaunchDTO> {
         return dbQuery.selectAllLaunchesInfo().executeAsList().map {
             RocketLaunchDTO(
+                rocketId = it.rocketId,
                 flightNumber = it.flightNumber.toInt(),
                 missionName = it.missionName,
                 details = it.details,
@@ -27,6 +28,7 @@ class Database(databaseDriverFactory: DatabaseDriverFactory) {
         launches.forEach { item ->
             item.flightNumber?.let {
                 dbQuery.insertLaunch(
+                    rocketId = item.rocketId,
                     flightNumber = it.toLong(),
                     missionName = item.missionName.orEmpty(),
                     details = item.details,

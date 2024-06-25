@@ -1,4 +1,4 @@
-package presentation
+package presentation.launch
 
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Arrangement
@@ -29,13 +29,16 @@ import cafe.adriel.voyager.core.screen.Screen
 import cafe.adriel.voyager.koin.koinScreenModel
 import domain.model.RocketLaunch
 
-object RocketLaunchScreen : Screen {
+data class RocketLaunchScreen(val rocketId: String) : Screen {
 
     @Composable
     override fun Content() {
         val modelScreen = koinScreenModel<RocketLaunchScreenModel>()
         val state by modelScreen.state.collectAsState()
-        RocketLaunchView(state = state, modelScreen::getAllLaunches)
+        modelScreen.getAllLaunches(false, rocketId)
+        RocketLaunchView(state = state) {
+            modelScreen.getAllLaunches(isForceReload = it, rocketId = rocketId)
+        }
     }
 }
 
