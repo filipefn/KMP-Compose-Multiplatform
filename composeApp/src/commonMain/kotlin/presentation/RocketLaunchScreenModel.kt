@@ -10,14 +10,14 @@ class RocketLaunchScreenModel(
 ) : StateScreenModel<RocketLaunchState>(RocketLaunchState.Loading) {
 
     init {
-        getAllLaunches()
+        getAllLaunches(false)
     }
 
-    fun getAllLaunches() {
+    fun getAllLaunches(isForceReload: Boolean) {
         screenModelScope.launch {
             mutableState.value = RocketLaunchState.Loading
             try {
-                val launches = repository.getAllLaunches(false)
+                val launches = repository.getAllLaunches(isForceReload)
                 mutableState.value = RocketLaunchState.Loaded(launches)
             } catch (e: Exception) {
                 mutableState.value = RocketLaunchState.Error
